@@ -37,7 +37,7 @@ LABEL org.opencontainers.image.vendor="Apollo GraphQL"
 # Note: base image is pre-configured with appropriate user restrictions for security
 
 # Copy MCP configuration file to container root (where server expects it)
-COPY .apollo/mcp.local.yaml /mcp.yaml
+COPY mcp.yaml /mcp.yaml
 
 # Copy any custom schema files or additional configuration
 COPY schema.graphql /schema.graphql
