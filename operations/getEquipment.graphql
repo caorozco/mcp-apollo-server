@@ -1,0 +1,19 @@
+query getEquipment($filterBy: [EquipmentFilterInput!]) {
+  equipments(filterBy: $filterBy) {
+    edges {
+      node {
+        dn
+        id
+        model
+        name
+        vendor {
+          name
+        }
+        ip
+        moLocation {
+          name
+        }
+      }
+    }
+  }
+}

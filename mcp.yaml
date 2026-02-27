@@ -1,0 +1,50 @@
+overrides:
+  mutation_mode: all
+introspection:
+  introspect:
+    enabled: true               # Required for AI to understand your schema
+  search:
+    enabled: true
+  execute:
+    enabled: true
+  validate:
+    enabled: true
+transport:
+  type: streamable_http
+  port: 8000                    # MCP server port (default: 8000)
+  host_validation:
+    enabled: false
+endpoint: https://symphony.demo5.telecomopennetworks.com/apollo # Your GraphQL API endpoint
+headers:
+  Authorization: "Basic c3ltcGhvbnlAbnR0ZGF0YS5jb206c3ltcGhvbnlAbnR0ZGF0YS5jb20="
+schema:
+  source: local
+  path: /schema.graphql
+operations:
+  source: local
+  paths: 
+    - /operations/
+
+#==============================================================================
+# Configuration Details
+# =============================================================================
+
+# name: "nextgenoss-mcp GraphQL API"
+# description: "GraphQL API for nextgenoss-mcp"
+
+# Essential settings for local development:
+# - mutations enabled for full API access
+# - introspection enabled for schema discovery
+# - tools loaded from operation collections
+# - connects to GraphQL API on port 4000
+
+# To customize:
+# 1. Create operation collections in Apollo Studio Sandbox
+# 2. Update endpoint to match your GraphQL server URL
+# 3. Run: docker build -f mcp.Dockerfile -t my-mcp-server .
+# 4. Run: docker run -p 8000:8000 --env-file .env my-mcp-server
+
+# Environment variables (optional):
+# GRAPHQL_ENDPOINT - override endpoint URL
+# MCP_PORT - override MCP server port
+# PROJECT_NAME - project identifier for AI assistant

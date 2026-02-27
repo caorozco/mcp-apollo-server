@@ -1,0 +1,11 @@
+# This tool return the users.
+query getUsers {
+  users {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
+}
