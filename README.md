@@ -7,5 +7,5 @@
 3. Include required operations (queries & mutations)
 4. Create docker image "docker build -f mcp.Dockerfile -t nextgenoss-mcp ."
 5. Create docker container "docker run -p 8002:8000 --env-file .env -v ${pwd}/mcp.yaml:/mcp.yaml nextgenoss-mcp /mcp.yaml"
-6. Test with MCP Inspector "npx @modelcontextprotocol/inspector http://127.0.0.1:8002/mcp --transport http"
+6. Test with MCP Inspector "docker run --rm -e HOST=0.0.0.0 -p 6274:6274 -p 6277:6277 ghcr.io/modelcontextprotocol/inspector:latest" - MCP_URL: http://host.docker.internal:8002/mcp
 7. Create MCP Client 
