@@ -1,0 +1,40 @@
+# Tool to get the alarms of the equipment
+# This tool only return the 5 most recent alarms of the list
+# filter can be used to filter alarms for one or several equipment, and alarms in Active o Cleared status.
+# field "filter" must be an array.
+# field "field" value must be "status" or "alarmedObjectName"
+# field "operator" value must be "in"
+# field "typeFilter" value must be "AND"
+# field "values" value must be a list of strings with the name of the filtered equipment, and the list of the required Status
+# Follow this example:
+# {
+#   "filter": [
+#     {
+#       "field": "status",
+#       "operator": "in",
+#       "values": ["Active","Cleared"],
+#       "typeFilter": "AND"
+#     },
+#     {
+#       "field": "alarmedObjectName",
+#       "operator": "in",
+#       "values": ["Cofrentes_v52288_Utiel-NEC"],
+#       "typeFilter": "AND"
+#     },    
+#   ]
+# }
+query getAlarmList($filter: [FilterInput], $sordfield: FieldAlarmDefinition, $sorddir: String, $size: Float, $page: Float) {
+  alarmList(filter: $filter, sordfield: $sordfield, sorddir: $sorddir, size: $size, page: $page) {
+    alarmId
+    status
+    alarmTypeName
+    alarmedObjectName
+    alarmedObjectType
+    alarmRaisedTime
+    alarmClearedTime
+    perceivedSeverity
+    sourceSystem
+    thresholdRuleName
+    value
+  }
+}

@@ -1,0 +1,16 @@
+# Tool to get the base information of all the equipment
+# Used only when all equipments (not filtered)) data is requested
+query getAllEquipment {
+  equipments {
+    edges {
+      node {
+        dn
+        id
+        ip
+        name
+        model
+        operationalStatus
+      }
+    }
+  }
+}

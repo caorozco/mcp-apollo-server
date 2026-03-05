@@ -1,0 +1,41 @@
+# Tool to get KPIs catalog information
+# filterBy can be used to filter KPIs for one or several Managed Objects (equipment type).
+# field filterBy must be an array.
+# field filterType value must be "KPI_MANAGED_OBJECT"
+# field operator value must be "IS_ONE_OF"
+# field stringSet value must be a list of strings with the name of the filtered equipment type
+# Follow this example:
+# {
+#   "filterBy": [
+#     {
+#       "filterType": "KPI_MANAGED_OBJECT",
+#       "operator": "IS_ONE_OF",
+#       "stringSet": ["MO_EstacionM"]
+#     }
+#   ]
+# }
+query getKPIs($filterBy: [KpiFilterInput!]) {
+  kpis(filterBy: $filterBy) {
+    edges {
+      node {
+        id
+        name
+        description
+        elementType
+        kpiCategoryFK {
+          name
+        }
+        kpiunit {
+          name
+        }
+        managedObject {
+          name
+        }
+        networkType {
+          name
+        }
+        status
+      }
+    }
+  }
+}

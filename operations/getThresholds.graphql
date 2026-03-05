@@ -1,0 +1,35 @@
+# Tool to get Thresholds catalog information
+# Returns thresholds data type, algorithm, related KPI, related Managed Object and the severity values defined in the rule
+query getThresholds {
+  thresholds {
+    edges {
+      node {
+        id
+        name
+        alarmTypeName
+        algorithm
+        algorithmComparisonType
+        algorithmComparisonValue
+        measurementRule
+        measurementType
+        times        
+        description
+        expression {
+          terms {
+            kpi {
+              name
+              id
+            }
+          }
+        }
+        managedObject {
+          name
+        }
+        severity {
+          severity
+          severityValue
+        }
+      }
+    }
+  }
+}

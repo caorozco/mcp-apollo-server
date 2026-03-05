@@ -1,5 +1,5 @@
-# Tool to get specific equipment information
-# filterBy can be used to filter one or several equipment.
+# Tool to get the properties of specific equipment 
+# filterBy must be used to filter one or several equipment.
 # field filterBy must be an array.
 # field filterType value must be "EQUIP_INST_NAME"
 # field operator value must be "IS_ONE_OF"
@@ -14,26 +14,19 @@
 #     }
 #   ]
 # }
-query getEquipment ($filterBy: [EquipmentFilterInput!]){
+query getEquipmentProperties ($filterBy: [EquipmentFilterInput!]) {
   equipments(filterBy: $filterBy) {
     edges {
       node {
+        dn
         id
         name
-        model
-        ip
-        vendor {
-          name
+        properties {
+          propertyType {
+            name
+          }
+          rawValue
         }
-        moLocation {
-          name
-        }
-        dn
-        equipmentType {
-          name
-        }
-        lifecycleStatus
-        operationalStatus
       }
     }
   }

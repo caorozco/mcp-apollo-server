@@ -1,0 +1,73 @@
+# Tool to get KPIs values from specific equipment in a defined time period
+# input variables MUST be used to filter one or several equipment, one or several KPIs, and the time period. The input fields are:
+# field dataSource value must be always"fastoss-pm-metrics"
+# field preAggType value must be always "RAW"
+# field timeFilter must be an object containing the object "fixed", which contains the fields fromTime and toTime.
+# field fromTime must be a timestamp with the minimum timestamp of the period, followwng the format YYY-MM-DDTHH:MM:SS+02:00
+# field toTime must be a timestamp with the maximum timestamp of the period, following the format YYY-MM-DDTHH:MM:SS+02:00
+# field criteria must be on object containing the following fields:
+# field useLookups value must be always true
+# field sliceBy value must be always ["dn"]
+# field includeDims value must be always true
+# field timeGranularity correspond to the aggregation requested, pick one of (PT12H, PT1H, PT15M, PT1M, P1D, P1W). Default value should be "PT1H"
+# field metrics value must be an array of objects, one per each requested KPI. Each object must contains these fields:
+# field name value must be the name of the KPI.
+# field temporalAggSpec value must be an object containing the field func with the value "AVG".
+# field spatialAggSpec value must be an object containing the field func with the value "NONE".
+# field dimFilter value must be an array of one object, each object must contains this fields:
+# field dimName value must be "dn"".
+# field filterOp value must be "IN".
+# field listValue value must be an array of string including the name of the elements. 
+# Follow this example:
+# {
+#   "dataSource": "fastoss-pm-metrics",
+#   "preAggType": "RAW",
+#   "criteria": {
+#     "useLookups": true,
+#     "timeGranularity": "PT1H",
+#     "metrics": [
+#       {
+#         "name": "Condiciones_Climaticas",
+#         "temporalAggSpec": {
+#           "func": "AVG"
+#         },
+#         "spatialAggSpec": {
+#           "func": "NONE"
+#         }
+#       }
+#    ],
+#     "sliceBy": ["dn"],
+#     "includeDims": true,
+#     "dimFilter": [ 
+#       {
+#         "dimName": "dn",
+#         "filterOp": "IN",
+#         "listValue": ["08286"]
+#       }   
+#     ]
+#   },
+#   "timeFilter": {
+#     "fixed": {
+#       "fromTime": "2023-01-01T02:00:00+02:00",
+#       "toTime": "2023-01-01T03:50:00+02:00"
+#     }
+#   }
+# }
+query queryKPIsValues($dataSource: String!, $preAggType: PreAggType!, $criteria: MetricInput!, $timeFilter: TimeFilterInput) {
+  getMetricsAsTimeSeries(dataSource: $dataSource, preAggType: $preAggType, criteria: $criteria, timeFilter: $timeFilter) {
+    facts {
+      timeValues
+      dataSeries {
+        name
+        metricSpec {
+          name
+        }
+        dims {
+          name
+          value
+        }
+        values
+      }
+    }
+  }
+}
