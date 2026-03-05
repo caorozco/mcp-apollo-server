@@ -1,5 +1,13 @@
+# Apollo MCP Server Configuration - Local Development
+# This configuration connects your GraphQL API to AI assistants via MCP
+
+# Working local configuration:
 overrides:
   mutation_mode: all
+#operations:
+#  source: collection
+#  id: default                   # localhost:4000 in browser → Sandbox → Collections → Create operations for MCP tools
+                                # Docs: https://www.apollographql.com/docs/apollo-mcp-server/define-tools
 introspection:
   introspect:
     enabled: true               # Required for AI to understand your schema
@@ -20,17 +28,20 @@ headers:
 schema:
   source: local
   path: /schema.graphql
+#operations:
+#  source: local
+#  paths: 
+#    - /operations/
 operations:
-  source: local
-  paths: 
-    - /operations/
+  source: collection
+  id: 171ad4bc-c1af-4ceb-baaf-402b08611c0d
 
 #==============================================================================
 # Configuration Details
 # =============================================================================
 
-# name: "nextgenoss-mcp GraphQL API"
-# description: "GraphQL API for nextgenoss-mcp"
+#name: "nextgenoss-mcp GraphQL API"
+#description: "GraphQL API for nextgenoss-mcp"
 
 # Essential settings for local development:
 # - mutations enabled for full API access
